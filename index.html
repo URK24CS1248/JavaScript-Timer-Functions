@@ -1,0 +1,410 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photography Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+    transition: background-color 1s;
+}
+
+header {
+    background: #111;
+    color: white;
+    padding: 25px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 36px;
+    letter-spacing: 3px;
+}
+
+nav {
+    background: #222;
+    padding: 15px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #f0b35a;
+}
+
+.hero {
+    background: linear-gradient(#0008, #0008),
+    url("https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1600")
+    center/cover;
+    color: white;
+    text-align: center;
+    padding: 110px 20px;
+}
+
+.hero h2 {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 20px;
+}
+
+section {
+    padding: 45px 8%;
+    text-align: center;
+}
+
+section h2 {
+    margin-bottom: 25px;
+    font-size: 30px;
+}
+
+#time {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+#date {
+    margin-top: 8px;
+}
+
+#about p {
+    max-width: 750px;
+    margin: auto;
+    line-height: 1.8;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.photo {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px #0002;
+    transition: transform 0.3s;
+}
+
+.photo img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.photo h3 {
+    padding: 15px;
+}
+
+.photo:hover {
+    transform: scale(1.05);
+}
+
+#special {
+    font-size: 20px;
+    line-height: 1.7;
+}
+
+button {
+    background: #111;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    background: #c58c42;
+}
+
+#cameraArea {
+    width: 100%;
+    max-width: 600px;
+    height: 100px;
+    margin: 20px auto;
+    background: #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+}
+
+#camera {
+    position: absolute;
+    left: 0;
+    top: 20px;
+    font-size: 45px;
+}
+
+#studentList p {
+    margin: 12px;
+}
+
+footer {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>SUMANTH PHOTOGRAPHY</h1>
+    <p>Capturing Moments, Creating Memories</p>
+</header>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section class="hero" id="home">
+    <h2>Welcome to My Photography World</h2>
+    <p>Every picture tells a beautiful story.</p>
+</section>
+
+<section id="clock">
+    <h2>Current Date and Time</h2>
+    <div id="time">--:--:--</div>
+    <div id="date"></div>
+</section>
+
+<section id="about">
+    <h2>About Me</h2>
+    <p id="aboutText" onmouseover="incSize()" onmouseout="decSize()">
+        I am a passionate photographer who loves capturing nature,
+        portraits, wildlife and unforgettable moments. My goal is to
+        transform ordinary moments into extraordinary photographs.
+        Move your cursor over this paragraph to zoom in.
+    </p>
+</section>
+
+<section id="gallery">
+    <h2>My Photography Gallery</h2>
+
+    <div class="gallery">
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=600"
+                 alt="Mountain landscape">
+            <h3>Landscape Photography</h3>
+        </div>
+
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600"
+                 alt="Portrait photography">
+            <h3>Portrait Photography</h3>
+        </div>
+
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?w=600"
+                 alt="Wildlife photography">
+            <h3>Wildlife Photography</h3>
+        </div>
+
+        <div class="photo">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600"
+                 alt="Wedding photography">
+            <h3>Wedding Photography</h3>
+        </div>
+    </div>
+</section>
+
+<section id="services">
+    <h2>Photography Services</h2>
+    <div id="special"></div>
+    <button onclick="changeBackground()">Change Background</button>
+    <button onclick="moveRight()">Move Camera</button>
+    <button onclick="stop()">Stop Camera</button>
+
+    <div id="cameraArea">
+        <div id="camera">📷</div>
+    </div>
+</section>
+
+<section id="photographers">
+    <h2>Photography Team</h2>
+    <div id="studentList"></div>
+</section>
+
+<section id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: sumanthphotography@example.com</p>
+    <p>Instagram: @sumanth_photography</p>
+</section>
+
+<footer>
+    <p>© 2026 Sumanth Photography Portfolio</p>
+    <p>Designed with passion and creativity.</p>
+</footer>
+
+<script>
+// 1. Digital Clock using Date Object and setInterval()
+
+var days = [
+    "Sunday", "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday"
+];
+
+function display() {
+    var d = new Date();
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var s = d.getSeconds();
+
+    var ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12 || 12;
+    m = m < 10 ? "0" + m : m;
+    s = s < 10 ? "0" + s : s;
+
+    document.getElementById("time").innerHTML =
+        h + ":" + m + ":" + s + " " + ampm;
+
+    document.getElementById("date").innerHTML =
+        days[d.getDay()] + ", " + d.getDate() + "/" +
+        (d.getMonth() + 1) + "/" + d.getFullYear();
+}
+
+display();
+setInterval(display, 1000);
+
+
+// 2. Change Background Colour
+
+function changeBackground() {
+    var red = Math.floor(Math.random() * 100) + 155;
+    var green = Math.floor(Math.random() * 100) + 155;
+    var blue = Math.floor(Math.random() * 100) + 155;
+
+    var color = "rgb(" + red + "," + green + "," + blue + ")";
+    document.body.style.backgroundColor = color;
+}
+
+setInterval(changeBackground, 30000);
+
+
+// 3. Change Font Size using Mouse Events
+
+function incSize() {
+    document.getElementById("aboutText").style.fontSize = "22px";
+}
+
+function decSize() {
+    document.getElementById("aboutText").style.fontSize = "16px";
+}
+
+
+// 4. Move and Stop Camera using setTimeout()
+
+var cameraObj;
+var animate;
+var road = 600;
+
+function init() {
+    cameraObj = document.getElementById("camera");
+    road = document.getElementById("cameraArea").clientWidth;
+    cameraObj.style.left = "0px";
+}
+
+function moveRight() {
+    clearTimeout(animate);
+
+    var left = parseInt(cameraObj.style.left) + 2;
+
+    if (left > road - 60) {
+        left = 0;
+    }
+
+    cameraObj.style.left = left + "px";
+    animate = setTimeout(moveRight, 10);
+}
+
+function stop() {
+    clearTimeout(animate);
+}
+
+window.onload = init;
+
+
+// 5. Class and Object
+
+class PhotographyService {
+    constructor(name, price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    present() {
+        return "Service: " + this.name +
+               "<br>Starting Price: ₹" + this.price;
+    }
+}
+
+var special = new PhotographyService("Portrait Photography", 1500);
+
+document.getElementById("special").innerHTML = special.present();
+
+
+// 6. Array of Objects and if/else Categorization
+
+var photographers = [
+    { name: "Sumanth", role: "Landscape Photographer", experience: 3 },
+    { name: "Arun", role: "Portrait Photographer", experience: 1 },
+    { name: "Priya", role: "Wildlife Photographer", experience: 5 },
+    { name: "Rahul", role: "Wedding Photographer", experience: 2 }
+];
+
+var list = "";
+
+for (var i = 0; i < photographers.length; i++) {
+    var category;
+
+    if (photographers[i].experience < 2) {
+        category = "Beginner";
+    } else if (photographers[i].experience < 4) {
+        category = "Intermediate";
+    } else {
+        category = "Experienced";
+    }
+
+    list += "<p><b>" + photographers[i].name + "</b> - " +
+            photographers[i].role + " - " +
+            category + " (" + photographers[i].experience +
+            " years of experience)</p>";
+}
+
+document.getElementById("studentList").innerHTML = list;
+</script>
+
+</body>
+</html>
+```
